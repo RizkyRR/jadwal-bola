@@ -147,7 +147,12 @@ $(document).ready(function () {
 
 
     if (!(season === null) && !(season === '') && !(season === undefined)) {
-      showMatchFinished(season, moment().format('YYYY-MM-DD'), moment().add(1, 'days').format('YYYY-MM-DD'));
+      let getYesterdayStart = moment().subtract(1, 'days').format('YYYY-MM-DD');
+      console.log('Yesterday start : ' + getYesterdayStart);
+      let getYesterdayEnd = moment(getYesterdayStart).add(1, 'days').format('YYYY-MM-DD');
+      console.log('Yesterday end : ' + getYesterdayEnd);
+
+      showMatchFinished(season, getYesterdayStart, getYesterdayEnd);
 
       $('#fullcalendar').fullCalendar({
         header: {
@@ -266,11 +271,11 @@ $(document).ready(function () {
                             <div class="row">
                               <div class="col-md-6">
                                 <!-- <span class="material-icons">sports</span> -->
-                                <span class="material-icons">grass</span> ${getTodayMatch[i].venue.name}
+                                <span class="material-icons">grass</span> ${(getTodayMatch[i].venue != null) ? getTodayMatch[i].venue.name : ''}
                               </div>
   
                               <div class="col-md-6">
-                                <span class="material-icons">place</span> ${getTodayMatch[i].venue.city}
+                                <span class="material-icons">place</span> ${(getTodayMatch[i].venue != null) ? getTodayMatch[i].venue.city : ''}
                               </div>
                             </div>
   
